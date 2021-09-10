@@ -2,21 +2,36 @@ package com.betha.exemplo.exemplo.model;
 
 import com.betha.exemplo.exemplo.enterprise.AbstractEntity;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
 
+@Entity
+@Table(name = "CTAS_USUARIOS")
 public class ContaUsuario extends AbstractEntity {
 
+    @Column(name = "APELIDO")
     private String nomeConta;
+    @Column(name = "NOME")
     private String nomeCompleto;
+    @Column(name = "DATA_NASC")
     private LocalDate dataNascimento;
+    @Column(name = "DATA_CRIACAO")
     private LocalDate daraCriacaoConta;
+    @Column(name = "BIO")
     private String biografia;
+    @Column(name = "LINK")
     private String link;
+    @ManyToOne
+    @JoinColumn(name = "I_CIDADES", referencedColumnName = "ID")
     private Cidade cidade;
+    @Transient
     private Set<Feed> publicacoes;
+    @Transient
     private Set<Historia> historias;
+    @Transient
     private Set<ContaUsuario> seguidores;
+    @Transient
     private Set<ContaUsuario> seguindo;
 
     public String getNomeConta() {

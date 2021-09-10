@@ -1,16 +1,19 @@
 package com.betha.exemplo.exemplo.enterprise;
 
-import java.math.BigInteger;
+import javax.persistence.*;
 
+@MappedSuperclass
 public abstract class AbstractEntity {
 
-    private BigInteger id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    public BigInteger getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

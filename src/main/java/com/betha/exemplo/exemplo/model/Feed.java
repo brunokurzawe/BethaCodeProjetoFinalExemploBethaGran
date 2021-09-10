@@ -3,6 +3,11 @@ package com.betha.exemplo.exemplo.model;
 import com.betha.exemplo.exemplo.enterprise.AbstractEntity;
 import com.betha.exemplo.exemplo.enterprise.IPublicavel;
 
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import java.time.LocalDate;

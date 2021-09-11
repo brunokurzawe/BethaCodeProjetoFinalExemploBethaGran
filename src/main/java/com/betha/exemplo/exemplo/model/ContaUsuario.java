@@ -6,6 +6,8 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
 
+import static javax.persistence.CascadeType.ALL;
+
 @Entity
 @Table(name = "CTAS_USUARIOS")
 public class ContaUsuario extends AbstractEntity {
@@ -23,11 +25,15 @@ public class ContaUsuario extends AbstractEntity {
     @Column(name = "LINK")
     private String link;
     @ManyToOne
-    @JoinColumn(name = "I_CIDADES", referencedColumnName = "ID")
+    @JoinColumn(name = "I_CIDADES",
+            referencedColumnName = "ID")
     private Cidade cidade;
+
+    //@OneToMany(cascade = ALL, mappedBy = "contaUsuario")
     @Transient
     private Set<Feed> publicacoes;
-    @Transient
+
+    @OneToMany(cascade = ALL, mappedBy = "contaUsuario")
     private Set<Historia> historias;
     @Transient
     private Set<ContaUsuario> seguidores;

@@ -3,24 +3,38 @@ package com.betha.exemplo.exemplo.model;
 import com.betha.exemplo.exemplo.enterprise.AbstractEntity;
 import com.betha.exemplo.exemplo.enterprise.IPublicavel;
 
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "FEEDS")
 public class Feed extends AbstractEntity implements IPublicavel {
 
+    @ManyToOne
+    @JoinColumn(name = "I_CTAS_USUARIOS",
+            referencedColumnName = "ID")
     private ContaUsuario contaUsuario;
+    @Column(name = "TIPO")
     private TipoPublicacao tipoPublicacao;
+    @Column(name = "LINK")
     private String linkPublicacaoS3;
+    @Column(name = "DATA")
     private LocalDate dataPublicacao;
+    @NotNull
+    @Size(max = 12, min = 3)
+    @Column(name = "TEXTO")
     private String textoPublicacao;
+    @Transient
     private Set<Comentario> comentarios;
+    @Transient
     private Set<Curtida> curtidas;
+    @Transient
     private LocalizacaoPostagem localizacaoPostagem;
 
     public ContaUsuario getContaUsuario() {
@@ -91,7 +105,6 @@ public class Feed extends AbstractEntity implements IPublicavel {
     @Override
     public String toString() {
         return "Feed{" +
-                "contaUsuario=" + contaUsuario +
                 ", tipoPublicacao=" + tipoPublicacao +
                 ", dataPublicacao=" + dataPublicacao +
                 '}';
@@ -99,6 +112,6 @@ public class Feed extends AbstractEntity implements IPublicavel {
 
     @Override
     public ContaUsuario getUsuarioPublicou() {
-        return getUsuarioPublicou();
+        return this.contaUsuario;
     }
 }

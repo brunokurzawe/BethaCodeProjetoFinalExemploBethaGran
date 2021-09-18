@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/contas-usuarios")
@@ -17,8 +18,8 @@ public class ContaUsuarioController {
     private ContaUsuarioRepository repository;
 
     @GetMapping
-    public List<ContaUsuario> getContaUsuario() {
-        return repository.findAll();
+    public List<ContaUsuarioDto> getContaUsuario() {
+        return repository.findAll().stream().map(c -> ContaUsuarioDto.toDTO(c)).collect(Collectors.toList());
     }
 
     @PostMapping

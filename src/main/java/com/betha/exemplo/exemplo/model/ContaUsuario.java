@@ -29,8 +29,7 @@ public class ContaUsuario extends AbstractEntity {
             referencedColumnName = "ID")
     private Cidade cidade;
 
-    //@OneToMany(cascade = ALL, mappedBy = "contaUsuario")
-    @Transient
+    @OneToMany(cascade = ALL, mappedBy = "contaUsuario")
     private Set<Feed> publicacoes;
 
     @OneToMany(cascade = ALL, mappedBy = "contaUsuario")

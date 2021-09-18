@@ -15,6 +15,7 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/contas-usuarios-feeds")
@@ -24,8 +25,8 @@ public class FeedController {
     private FeedRepository repository;
 
     @GetMapping
-    public List<Feed> getFeeds() {
-        return repository.findAll();
+    public List<FeedDto> getFeeds() {
+        return repository.findAll().stream().map(f-> FeedDto.toDTO(f)).collect(Collectors.toList());
     }
 
     @PostMapping
